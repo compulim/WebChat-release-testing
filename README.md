@@ -33,3 +33,18 @@ Formalized directions for testing Web Chat for pre- and post-release.
 - 'Hello world'
 - Adaptive Cards
 - Speech: 'Testing 1 2 3'
+
+## Hosting page
+
+We assume the hosting page has 4 ways to load Web Chat
+
+- Without React
+   - Pure JavaScript: use `renderWebChat()`
+- With React
+   - Pure JavaScript: use `renderWebChat()`
+   - Babel
+      - Use `renderWebChat()`
+      - Use JSX `<ReactWebChat>`
+   - `create-react-app`: NPM + Webpack
+   
+On the React route, we assume the hosting page might call React Hooks. We need to verify Web Chat will not violate any rules of hooks.
