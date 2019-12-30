@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Babel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script crossorigin="anonymous" src="https://unpkg.com/babel-standalone@6/babel.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/regenerator-runtime@0.13.3/runtime.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/markdown-it/dist/markdown-it.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/whatwg-fetch"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react@16.8.6/umd/react.development.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js"></script>
+
+    <link href="../common/cheatSheet.css" rel="stylesheet" />
+    <link href="../common/markdown.css" rel="stylesheet" />
+    <link href="../common/webchat.css" rel="stylesheet" />
+    <script src="../common/createFetchTokens.js" type="text/babel"></script>
+    <script src="../common/renderCheatSheet.js" type="text/babel"></script>
+
+    <script src="../drops/webchat-es5.js"></script>
+  </head>
+  <body>
+    <div id="webchat" role="main"></div>
+    <script type="text/babel" data-presets="es2015,react,stage-3">
+      const { fetchDirectLineToken, fetchSpeechServicesRegion, fetchSpeechServicesToken } = window.createFetchTokens();
+      const {
+        React: { useEffect },
+        ReactDOM,
+        WebChat: { createCognitiveServicesSpeechServicesPonyfillFactory, createDirectLine, createStore, ReactWebChat }
+      } = window;
+      const store = (window.webChatStore = createStore());
+
+      async function main() {
+        const directLine = createDirectLine({ token: await fetchDirectLineToken() });
+        const store = window.webChatStore = createStore();
+
+        // Create Web Speech ponyfill if the browser supports WebRTC
+        const webSpeechPonyfillFactory =
+          window.navigator.mediaDevices &&
+          (await createCognitiveServicesSpeechServicesPonyfillFactory({
+            authorizationToken: fetchSpeechServicesToken,
+            region: await fetchSpeechServicesRegion()
+          }));
+
+        const App = () => {
+          // We want to make sure we didn't break React hooks in hosting apps
+          useEffect(() => {});
+
+          return (
+            <ReactWebChat
+              directLine={directLine}
+              // Firefox defaults language to "en", which is not supported by Cognitive Services, so we need to specify it as "en-US"
+              locale="en-US"
+              store={store}
+              webSpeechPonyfillFactory={webSpeechPonyfillFactory}
+            />
+          );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('webchat'));
+      }
+
+      main().catch(err => console.error(err));
+    </script>
+  </body>
+</html>

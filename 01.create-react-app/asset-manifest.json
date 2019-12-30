@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/webchat-release-testing/01.create-react-app/static/css/main.aed8e420.chunk.css",
+    "main.js": "/webchat-release-testing/01.create-react-app/static/js/main.775e82a8.chunk.js",
+    "main.js.map": "/webchat-release-testing/01.create-react-app/static/js/main.775e82a8.chunk.js.map",
+    "runtime-main.js": "/webchat-release-testing/01.create-react-app/static/js/runtime-main.ca192c1b.js",
+    "runtime-main.js.map": "/webchat-release-testing/01.create-react-app/static/js/runtime-main.ca192c1b.js.map",
+    "static/js/2.c51ebe95.chunk.js": "/webchat-release-testing/01.create-react-app/static/js/2.c51ebe95.chunk.js",
+    "static/js/2.c51ebe95.chunk.js.map": "/webchat-release-testing/01.create-react-app/static/js/2.c51ebe95.chunk.js.map",
+    "index.html": "/webchat-release-testing/01.create-react-app/index.html",
+    "precache-manifest.4a694bf19a7da7f08d65d8f8c2d8238b.js": "/webchat-release-testing/01.create-react-app/precache-manifest.4a694bf19a7da7f08d65d8f8c2d8238b.js",
+    "service-worker.js": "/webchat-release-testing/01.create-react-app/service-worker.js",
+    "static/css/main.aed8e420.chunk.css.map": "/webchat-release-testing/01.create-react-app/static/css/main.aed8e420.chunk.css.map",
+    "static/js/2.c51ebe95.chunk.js.LICENSE": "/webchat-release-testing/01.create-react-app/static/js/2.c51ebe95.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ca192c1b.js",
+    "static/js/2.c51ebe95.chunk.js",
+    "static/css/main.aed8e420.chunk.css",
+    "static/js/main.775e82a8.chunk.js"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "cleanUrls": false,
+  "etag": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "index.html"
+    }
+  ]
+}
