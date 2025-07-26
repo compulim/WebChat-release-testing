@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/WebChat-release-testing/01.create-react-app/static/css/main.7627aefb.css",
+    "main.js": "/WebChat-release-testing/01.create-react-app/static/js/main.a15d5d5b.js",
+    "index.html": "/WebChat-release-testing/01.create-react-app/index.html",
+    "static/media/index.cjs": "/WebChat-release-testing/01.create-react-app/static/media/index.f6d03137e8c9dd0de04c.cjs",
+    "main.7627aefb.css.map": "/WebChat-release-testing/01.create-react-app/static/css/main.7627aefb.css.map",
+    "main.a15d5d5b.js.map": "/WebChat-release-testing/01.create-react-app/static/js/main.a15d5d5b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7627aefb.css",
+    "static/js/main.a15d5d5b.js"
+  ]
+}
