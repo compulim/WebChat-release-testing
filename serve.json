@@ -1,0 +1,93 @@
+{
+  "cleanUrls": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "index.html"
+    },
+    {
+      "source": "/webchat-release-testing/01.create-react-app/:path1/:path2/:filename",
+      "destination": "01.create-react-app/build/:path1/:path2/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/01.create-react-app/:path1/:filename",
+      "destination": "01.create-react-app/build/:path1/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/01.create-react-app/:filename",
+      "destination": "01.create-react-app/build/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/06.esbuild/:path1/:path2/:path3/:filename",
+      "destination": "06.esbuild/public/:path1/:path2/:path3/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/06.esbuild/:path1/:path2/:filename",
+      "destination": "06.esbuild/public/:path1/:path2/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/06.esbuild/:path1/:filename",
+      "destination": "06.esbuild/public/:path1/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/06.esbuild/:filename",
+      "destination": "06.esbuild/public/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/07.a.webpack4-cjs/:path1/:path2/:path3/:filename",
+      "destination": "07.a.webpack4-cjs/public/:path1/:path2/:path3/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/07.a.webpack4-cjs/:path1/:path2/:filename",
+      "destination": "07.a.webpack4-cjs/public/:path1/:path2/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/07.a.webpack4-cjs/:path1/:filename",
+      "destination": "07.a.webpack4-cjs/public/:path1/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/07.a.webpack4-cjs/:filename",
+      "destination": "07.a.webpack4-cjs/public/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/07.b.webpack4-esm/:path1/:path2/:path3/:filename",
+      "destination": "07.b.webpack4-esm/public/:path1/:path2/:path3/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/07.b.webpack4-esm/:path1/:path2/:filename",
+      "destination": "07.b.webpack4-esm/public/:path1/:path2/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/07.b.webpack4-esm/:path1/:filename",
+      "destination": "07.b.webpack4-esm/public/:path1/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/07.b.webpack4-esm/:filename",
+      "destination": "07.b.webpack4-esm/public/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/08.webpack5/:path1/:path2/:path3/:filename",
+      "destination": "08.webpack5/public/:path1/:path2/:path3/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/08.webpack5/:path1/:path2/:filename",
+      "destination": "08.webpack5/public/:path1/:path2/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/08.webpack5/:path1/:filename",
+      "destination": "08.webpack5/public/:path1/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/08.webpack5/:filename",
+      "destination": "08.webpack5/public/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/common/:path1/:filename",
+      "destination": "common/:path1/:filename"
+    },
+    {
+      "source": "/webchat-release-testing/common/:filename",
+      "destination": "common/:filename"
+    }
+  ]
+}

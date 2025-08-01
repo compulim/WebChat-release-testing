@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script crossorigin="anonymous" src="https://unpkg.com/babel-standalone@6/babel.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/regenerator-runtime@0.13.3/runtime.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/markdown-it/dist/markdown-it.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/whatwg-fetch"></script>
+    <base href="/WebChat-release-testing/08.webpack5/" />
+    <link href="../common/cheatSheet.css" rel="stylesheet" />
+    <link href="../common/markdown.css" rel="stylesheet" />
+    <link href="../common/webchat.css" rel="stylesheet" />
+    <script
+      data-presets="es2015,stage-3"
+      src="../common/createDirectLineWithTranscript.js"
+      type="text/babel"
+    ></script>
+    <script data-presets="es2015,stage-3" src="../common/createFetchTokens.js" type="text/babel"></script>
+    <script data-presets="es2015,stage-3" src="../common/loadCustomization.js" type="text/babel"></script>
+    <script data-presets="es2015,stage-3" src="../common/renderCheatSheet.js" type="text/babel"></script>
+
+    <meta charset="utf-8" />
+    <link href="./index.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Webpack 5 app</title>
+  </head>
+  <body>
+    <main></main>
+    <script src="./static/js/bundle.js"></script>
+  </body>
+</html>

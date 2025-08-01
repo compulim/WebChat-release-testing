@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <script src="https://www.cdc.gov/TemplatePackage/contrib/libs/jquery/latest/jquery.min.js"></script>
+    <!-- <script src="https://github.com/microsoft/BotFramework-WebChat/releases/download/daily/webchat-es5.js"></script> -->
+    <script src="../../drops/webchat-es5.js"></script>
+    <!-- hawo: Use React 16.8.6 to do customization, please consider caching React library on your servers -->
+    <script src="https://unpkg.com/react@16.8.6/umd/react.production.min.js"></script>
+    <script src="index.js"></script>
+    <link href="stylesheets/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="webchat" role="main"></div>
+    <script>
+      requestChatBot();
+    </script>
+    <!-- <script src="https://www.cdc.gov/JScript/metrics/topic_levels.js"></script>
+  	<script src="https://www.cdc.gov/JScript/metrics/adobe/analytics_devcdc.js"></script> -->
+    <script>
+      s = {
+        t: function () {
+          return 0;
+        }
+      };
+
+      siteCatalyst = {
+        setLevel1: function () {},
+        setLevel2: function () {},
+        setLevel3: function () {},
+        setLevel4: function () {},
+        setLevel5: function () {}
+      };
+
+      updateVariables = function () {};
+    </script>
+    <script>
+      s.pageName = 'Coronavirus Assessment Tool';
+      s.channel = 'Coronavirus';
+      siteCatalyst.setLevel1('ncird');
+      siteCatalyst.setLevel2('coronavirus');
+      siteCatalyst.setLevel3('multi');
+      siteCatalyst.setLevel4('dvd');
+      siteCatalyst.setLevel5('2019-nCoV');
+
+      if ('' !== CDC.partnerUrl) {
+        s.referrer = CDC.partnerUrl;
+        s.prop8 = 'Widget';
+      }
+
+      if ('' === CDC.language) {
+        s.prop5 = 'eng';
+      } else if ('es' === CDC.language || 0 === CDC.language.indexOf('es-')) {
+        s.prop5 = 'spa';
+      } else if ('ko' === CDC.language || 0 === CDC.language.indexOf('ko-')) {
+        s.prop5 = 'kor';
+      } else if ('vi' === CDC.language || 0 === CDC.language.indexOf('vi-')) {
+        s.prop5 = 'vie';
+      } else if ('zh' === CDC.language || 0 === CDC.language.indexOf('zh-')) {
+        s.prop5 = 'chi';
+      } else {
+        s.prop5 = 'eng';
+      }
+
+      // Update the level variables here.
+      updateVariables(s);
+
+      var s_code = s.t();
+      if (s_code) {
+        document.write(s_code);
+      }
+    </script>
+  </body>
+</html>
