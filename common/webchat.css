@@ -1,0 +1,16 @@
+html,
+body,
+#webchat {
+  height: 100%;
+}
+
+body {
+  background-color: #EEE;
+  margin: 0;
+}
+
+#webchat {
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  min-width: 320px;
+  max-width: 480px;
+}
