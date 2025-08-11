@@ -1,0 +1,13 @@
+html {
+  background-color: #EEE;
+  font-family: Calibri, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  background-color: White;
+  box-shadow: 0 0 50px rgba(0, 0, 0, .1);
+  margin: 0 auto;
+  max-width: 768px;
+  min-height: calc(100vh - 2em);
+  padding: 1em 4em;
+}
