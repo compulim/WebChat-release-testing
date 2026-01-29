@@ -24,6 +24,16 @@ env:
   BUILDABLE: '["01.create-react-app", "06.esbuild", "07.a.webpack4-cjs", "07.b.webpack4-esm", "08.webpack5"]'
 
 jobs:
+  prepare:
+    name: Prepare
+    outputs:
+      buildable: ${{ steps.dump.outputs.buildable }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: dump
+        run: echo buildable=${{ env.BUILDABLE }} | tee --append $GITHUB_OUTPUT
+
   download-tarball:
     name: Download
     runs-on: ubuntu-latest
@@ -49,10 +59,11 @@ jobs:
     name: Build
     needs:
       - download-tarball
+      - prepare
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        buildable: ${{ fromJSON(env.BUILDABLE) }}
+        buildable: ${{ fromJSON(needs.prepare.outputs.buildable) }}
 
     steps:
       - name: Checkout
@@ -100,6 +111,7 @@ jobs:
   build-pages:
     needs:
       - build-pages
+      - prepare
     runs-on: ubuntu-latest
 
     steps:
@@ -108,7 +120,7 @@ jobs:
 
       - name: Remove buildables
         run:
-          echo ${{ env.BUILDABLE }} | jq .[] | xargs rm -r
+          echo ${{ needs.prepare.outputs.buildable }} | jq .[] | xargs rm -r
 
       - uses: actions/download-artifact@v7
         with:
