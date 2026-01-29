@@ -55,8 +55,8 @@ jobs:
             !drops/.gitignore
             !drops/*.sh
 
-  build:
-    name: Build
+  build-package:
+    name: Build package
     needs:
       - download-tarball
       - prepare
@@ -113,10 +113,43 @@ jobs:
           name: build-${{ matrix.buildable }}
           path: artifact/
 
+  build-bundle:
+    name: Build bundle
+    needs:
+      - download-tarball
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Download tarball
+        uses: actions/download-artifact@v7
+        with:
+          name: tarball
+          path: drops/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          if-no-files-found: error
+          name: build-bundle
+          path: |
+            drops/
+            !drops/.gitignore
+            !drops/*.sh
+            !drops/*.tgz
+
   build-pages:
     name: Build pages
     needs:
-      - build
+      - build-bundle
+      - build-package
       - prepare
     runs-on: ubuntu-latest
 
