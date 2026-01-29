@@ -5,7 +5,12 @@ on:
     branches: ['main']
   schedule:
     - cron: '0 4 * * 6'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      tag:
+        default: main
+        name: Download tag
+        type: string
 
 concurrency:
   group: pages
@@ -24,8 +29,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - run: ./download-main.sh
-      - run: ./download-latest.sh
+      - run: ./download-tag.sh ${{ inputs.tag || 'latest' }}
         working-directory: drops
 
       - name: Upload tarballs
