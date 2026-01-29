@@ -110,7 +110,7 @@ jobs:
 
   build-pages:
     needs:
-      - build-pages
+      - build
       - prepare
     runs-on: ubuntu-latest
 
