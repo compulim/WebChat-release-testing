@@ -96,9 +96,9 @@ jobs:
 
       - name: Move build output
         run: |
-          mkdir -p artifact/${{ matrix.buildable }}
-          mv ${{ matrix.buildable }}/public artifacts
-          mv artifacts/public artifacts/${{ matrix.buildable }}
+          mkdir -p artifact
+          mv ${{ matrix.buildable }}/public artifact
+          mv artifact/public artifact/${{ matrix.buildable }}
           echo $(date) > artifact/build-${{ matrix.buildable }}.txt
 
       - name: Upload artifact
