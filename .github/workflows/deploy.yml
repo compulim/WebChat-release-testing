@@ -120,8 +120,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Remove buildables
-        run:
+        run: |
           echo '${{ needs.prepare.outputs.buildable }}' | jq .[] | xargs rm -r
+          ls -la
 
       - uses: actions/download-artifact@v7
         with:
@@ -135,7 +136,7 @@ jobs:
   deploy-pages:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.output.pages_url }}
+      url: ${{ steps.deployment.outputs.pages_url }}
     name: Deploy pages
     needs:
       - build-pages
