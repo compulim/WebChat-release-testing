@@ -20,6 +20,9 @@ defaults:
   run:
     shell: bash
 
+env:
+  BUILDABLE: '["01.create-react-app", "06.esbuild", "07.a.webpack4-cjs", "07.b.webpack4-esm", "08.webpack5"]'
+
 jobs:
   download-tarball:
     name: Download
@@ -49,12 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        buildable:
-          - 01.create-react-app
-          - 06.esbuild
-          - 07.a.webpack4-cjs
-          - 07.b.webpack4-esm
-          - 08.webpack5
+        buildable: ${{ fromJSON(env.BUILDABLE) }}
 
     steps:
       - name: Checkout
@@ -80,10 +78,16 @@ jobs:
       - run: npm run build
         working-directory: ${{ matrix.buildable }}
 
+      - if: matrix.buildable == '01.create-react-app'
+        name: Rename build/ to public/
+        run: mv build public
+        working-directory: 01.create-react-app
+
       - name: Move build output
         run: |
           mkdir -p artifact/${{ matrix.buildable }}
-          mv ${{ matrix.buildable }}/${{ matrix.buildable == '01.create-react-app' && 'build' || 'public' }} artifact/${{ matrix.buildable }}
+          mv ${{ matrix.buildable }}/public artifacts
+          mv artifacts/public artifacts/${{ matrix.buildable }}
           echo $(date) > artifact/build-${{ matrix.buildable }}.txt
 
       - name: Upload artifact
@@ -93,15 +97,24 @@ jobs:
           name: build-${{ matrix.buildable }}
           path: artifact/
 
-  # build-pages:
-  #   needs:
-  #     - build-pages
-  #   runs-on: ubuntu-latest
+  build-pages:
+    needs:
+      - build-pages
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - name: Download artifacts
-  #       uses: actions/download-artifact@v7
-  #       with:
+      - name: Remove buildables
+        run:
+          echo ${{ env.BUILDABLE }} | jq .[] | xargs rm -r
+
+      - uses: actions/download-artifact@v7
+        with:
+          name: build-*
+          merge-multiple: true
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
