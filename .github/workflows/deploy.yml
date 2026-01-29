@@ -21,7 +21,7 @@ defaults:
     shell: bash
 
 env:
-  BUILDABLE: '["01.create-react-app", "06.esbuild", "07.a.webpack4-cjs", "07.b.webpack4-esm", "08.webpack5"]'
+  buildable: '["01.create-react-app", "06.esbuild", "07.a.webpack4-cjs", "07.b.webpack4-esm", "08.webpack5"]'
 
 jobs:
   prepare:
@@ -32,9 +32,11 @@ jobs:
 
     steps:
       - id: dump
-        run: echo 'buildable=${{ env.BUILDABLE }}' | tee --append $GITHUB_OUTPUT
+        run: echo 'buildable=${{ env.buildable }}' | tee --append $GITHUB_OUTPUT
 
   download-tarball:
+    env:
+      tag: ${{ inputs.tag || 'main' }}
     name: Download
     runs-on: ubuntu-latest
 
@@ -42,7 +44,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: ./download-tag.sh ${{ inputs.tag || 'main' }}
+      - name: Download tarball (${{ env.tag }})
+        run: |
+          ./download-tag.sh ${{ env.tag }}
+          ls -la
         working-directory: drops
 
       - name: Upload tarballs
