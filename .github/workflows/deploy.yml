@@ -90,15 +90,20 @@ jobs:
         working-directory: ${{ matrix.buildable }}
 
       - if: matrix.buildable == '01.create-react-app'
-        name: Rename build/ to public/
-        run: mv build public
-        working-directory: 01.create-react-app
+        name: Rename build/ to dist/
+        run: mv build/ dist/
+        working-directory: ${{ matrix.buildable }}
+
+      - if: matrix.buildable != '01.create-react-app'
+        name: Rename public/ to dist/
+        run: mv public/ dist/
+        working-directory: ${{ matrix.buildable }}
 
       - name: Move build output
         run: |
-          mkdir -p artifact
-          mv ${{ matrix.buildable }}/public artifact
-          mv artifact/public artifact/${{ matrix.buildable }}
+          mkdir -p artifact/
+          mv ${{ matrix.buildable }}/dist/ artifact/
+          mv artifact/dist/ artifact/${{ matrix.buildable }}/
           echo $(date) > artifact/build-${{ matrix.buildable }}.txt
 
       - name: Upload artifact
