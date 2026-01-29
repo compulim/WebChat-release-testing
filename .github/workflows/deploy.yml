@@ -24,7 +24,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: ./download-main.sh
+      # - run: ./download-main.sh
+      - run: ./download-latest.sh
         working-directory: drops
 
       - name: Upload tarballs
