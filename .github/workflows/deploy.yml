@@ -109,6 +109,7 @@ jobs:
           path: artifact/
 
   build-pages:
+    name: Build pages
     needs:
       - build
       - prepare
@@ -120,7 +121,7 @@ jobs:
 
       - name: Remove buildables
         run:
-          echo ${{ needs.prepare.outputs.buildable }} | jq .[] | xargs rm -r
+          echo '${{ needs.prepare.outputs.buildable }}' | jq .[] | xargs rm -r
 
       - uses: actions/download-artifact@v7
         with:
