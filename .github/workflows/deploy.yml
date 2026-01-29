@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - id: dump
-        run: echo buildable=${{ env.BUILDABLE }} | tee --append $GITHUB_OUTPUT
+        run: echo 'buildable=${{ env.BUILDABLE }}' | tee --append $GITHUB_OUTPUT
 
   download-tarball:
     name: Download
