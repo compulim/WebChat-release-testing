@@ -136,7 +136,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.output.pages_url }}
-    need: Deploy pages
+    name: Deploy pages
     needs:
       - build-pages
     permissions:
