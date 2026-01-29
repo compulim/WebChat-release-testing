@@ -146,4 +146,4 @@ jobs:
 
     steps:
       - id: deployment
-        uses: actions/deploy-pages
+        uses: actions/deploy-pages@v4
