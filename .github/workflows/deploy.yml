@@ -125,9 +125,25 @@ jobs:
 
       - uses: actions/download-artifact@v7
         with:
-          name: build-*
           merge-multiple: true
+          pattern: build-*
 
       - uses: actions/upload-pages-artifact@v4
         with:
           path: .
+
+  deploy-pages:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.output.pages_url }}
+    need: Deploy pages
+    needs:
+      - build-pages
+    permissions:
+      id-token: write
+      pages: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages
