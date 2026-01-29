@@ -76,13 +76,18 @@ jobs:
       - run: npm run build
         working-directory: ${{ matrix.buildable }}
 
+      - name: Move build output
+        run: |
+          mkdir -p artifact/${{ matrix.buildable }}
+          mv ${{ matrix.buildable }}/${{ matrix.buildable == '01.create-react-app' && 'build' || 'public' }} artifact/${{ matrix.buildable }}
+          echo $(date) > artifact/build-${{ matrix.buildable }}.txt
+
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
           if-no-files-found: error
           name: build-${{ matrix.buildable }}
-          path: |
-            ${{ matrix.buildable }}/${{ matrix.buildable == '01.create-react-app' && 'build' || 'public' }}
+          path: artifact/
 
   # build-pages:
   #   needs:
