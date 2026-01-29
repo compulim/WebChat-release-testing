@@ -134,12 +134,15 @@ jobs:
           name: tarball
           path: drops/
 
+      - run: echo $(date) > build-bundle.txt
+
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
           if-no-files-found: error
           name: build-bundle
           path: |
+            build-bundle.txt
             drops/
             !drops/.gitignore
             !drops/*.sh
