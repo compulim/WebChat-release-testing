@@ -9,7 +9,7 @@ on:
     inputs:
       tag:
         default: main
-        name: Download tag
+        description: Version to deploy
         type: string
 
 concurrency:
@@ -42,7 +42,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: ./download-tag.sh ${{ inputs.tag || 'latest' }}
+      - run: ./download-tag.sh ${{ inputs.tag || 'main' }}
         working-directory: drops
 
       - name: Upload tarballs
