@@ -61,9 +61,13 @@ Using Web Chat with `renderWebChat` with some JSX.
 <script>
   renderWebChat(
     {
-      activityMiddleware: () => next => card => children => (
-        <ActivityContainer>{next(card)(children)}</ActivityContainer>
-      ),
+      activityMiddleware: () => next => card => {
+        const result = next(card);
+
+        return children => (
+          <ActivityContainer>{result && result(children)}</ActivityContainer>
+        );
+      },
       ...
     },
     document.getElementById('webchat')
