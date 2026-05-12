@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US">
   <head>
     <title>JS w/o React</title>
@@ -52,9 +52,9 @@
         await window.WebChatReleaseTesting.renderCheatSheet();
 
         const { createDirectLineMiddleware, patchProps } = window.WebChatReleaseTesting.customizations;
-        const directLine = (createDirectLineMiddleware
-          ? createDirectLineMiddleware()(createDirectLine)
-          : createDirectLine)({ token: await fetchDirectLineToken() });
+        const directLine = (
+          createDirectLineMiddleware ? createDirectLineMiddleware()(createDirectLine) : createDirectLine
+        )({ token: await fetchDirectLineToken() });
         const store = (window.webChatStore = createStore());
 
         // Create Web Speech ponyfill if the browser support WebRTC
@@ -73,9 +73,11 @@
 
         renderWebChat(
           await patchProps({
-            activityMiddleware: () => next => card => children => (
-              <ActivityContainer>{next(card)(children)}</ActivityContainer>
-            ),
+            activityMiddleware: () => next => card => {
+              const result = next(card);
+
+              return children => <ActivityContainer>{result(children)}</ActivityContainer>;
+            },
             directLine,
             // Firefox default language to "en", which is not supported by Cognitive Services, we need to specify it as "en-US"
             locale: 'en-US',
