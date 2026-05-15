@@ -2,7 +2,7 @@ name: '🚀 Build and deploy'
 
 on:
   release:
-    types: ['created', 'edited']
+    types: ['edited', 'published', 'released']
   push:
     branches: ['main']
   schedule:
