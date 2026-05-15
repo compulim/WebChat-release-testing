@@ -65,7 +65,7 @@ jobs:
         name: Download tarball from release (${{ env.release-tag }})
         run: |
           gh release download ${{ env.release-tag }} --pattern tarballs.tar
-          tar -xf ../tarballs.tar -C . --transform='s|.*/||' --overwrite
+          tar -xf tarballs.tar -C . --transform='s|.*/||' --overwrite
           rm tarballs.tar
           tar -xvzf $(find . -maxdepth 1 -type f -printf '%f\n' | grep -E '^botframework-webchat-[0-9].*\.tgz$') --strip-components=2 --wildcards 'package/dist/webchat*.js'
           ls -la
