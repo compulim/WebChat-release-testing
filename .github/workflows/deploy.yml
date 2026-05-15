@@ -56,9 +56,8 @@ jobs:
       - if: github.event_name == 'release'
         name: Download tarball from release (${{ github.ref }})
         run: |
-          gh release download ${{ github.ref }} --pattern tarballs.zip
-          unzip tarballs.zip
-          rm tarballs.zip
+          gh release download ${{ github.ref }} --pattern tarballs.tar
+          tar -xvf tarballs.tar --strip-components=$(tar -tf tarballs.tar | head -1 | grep -o '/' | wc -l)
           ls -la
         working-directory: drops
 
