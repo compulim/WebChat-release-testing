@@ -1,8 +1,6 @@
 name: '🚀 Build and deploy'
 
 on:
-  release:
-    types: ['edited', 'published', 'released']
   push:
     branches: ['main']
   schedule:
@@ -12,6 +10,9 @@ on:
       tag:
         default: main
         description: Version to deploy
+        type: string
+      release-tag:
+        description: Tag to deploy from
         type: string
 
 concurrency:
@@ -38,6 +39,7 @@ jobs:
 
   download-tarball:
     env:
+      release-tag: ${{ inputs.release-tag }}
       tag: ${{ inputs.tag || 'main' }}
     name: Download
     runs-on: ubuntu-latest
@@ -46,17 +48,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - if: github.event_name != 'release'
+      - if: !env.release-tag
         name: Download tarball from NPM (${{ env.tag }})
         run: |
           ./download-tag.sh ${{ env.tag }}
           ls -la
         working-directory: drops
 
-      - if: github.event_name == 'release'
-        name: Download tarball from release (${{ github.ref }})
+      - if: env.release-tag
+        name: Download tarball from release (${{ env.release-tag }})
         run: |
-          gh release download ${{ github.ref }} --pattern tarballs.tar
+          gh release download ${{ env.release-tag }} --pattern tarballs.tar
           tar -xvf tarballs.tar --strip-components=$(tar -tf tarballs.tar | head -1 | grep -o '/' | wc -l)
           ls -la
         working-directory: drops
