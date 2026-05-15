@@ -39,7 +39,7 @@ jobs:
 
   download-tarball:
     env:
-      release-tag: ${{ inputs.release-tag }}
+      release-tag: ${{ inputs.release-tag || '' }}
       tag: ${{ inputs.tag || 'main' }}
     name: Download
     runs-on: ubuntu-latest
@@ -48,14 +48,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - if: !env.release-tag
+      - if: env.release-tag == ''
         name: Download tarball from NPM (${{ env.tag }})
         run: |
           ./download-tag.sh ${{ env.tag }}
           ls -la
         working-directory: drops
 
-      - if: env.release-tag
+      - if: env.release-tag != ''
         name: Download tarball from release (${{ env.release-tag }})
         run: |
           gh release download ${{ env.release-tag }} --pattern tarballs.tar
