@@ -55,7 +55,9 @@ jobs:
           ls -la
         working-directory: drops
 
-      - if: env.release-tag != ''
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        if: env.release-tag != ''
         name: Download tarball from release (${{ env.release-tag }})
         run: |
           gh release download ${{ env.release-tag }} --pattern tarballs.tar
