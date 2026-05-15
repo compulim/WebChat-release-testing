@@ -1,6 +1,8 @@
 name: '🚀 Build and deploy'
 
 on:
+  release:
+    types: created
   push:
     branches: ['main']
   schedule:
@@ -44,9 +46,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download tarball (${{ env.tag }})
+      - if: github.event_name != 'release'
+        name: Download tarball from NPM (${{ env.tag }})
         run: |
           ./download-tag.sh ${{ env.tag }}
+          ls -la
+        working-directory: drops
+
+      - if: github.event_name == 'release'
+        name: Download tarball from release (${{ github.ref }})
+        run: |
+          gh release download ${{ github.ref }} --pattern tarballs.zip
+          unzip tarballs.zip
+          rm tarballs.zip
           ls -la
         working-directory: drops
 
