@@ -15,5 +15,5 @@
 
 1. [Emulate airplane mode](index.html?customization=dljs-airplane-mode)
 1. [Use invalid token](index.html?customization=dljs-bad-token)
-1. ~Test [Direct Line Speech](index.html?customization=direct-line-speech) via CDN~
+1. ~~Test [Direct Line Speech](index.html?customization=direct-line-speech) via CDN~~
 1. Test [Direct Line App Service Extension](index.html?customization=direct-line-app-service-extension) via NPM
