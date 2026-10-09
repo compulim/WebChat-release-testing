@@ -9,10 +9,10 @@ on:
     inputs:
       tag:
         default: main
-        description: Version to deploy
+        description: NPM version to install ("1.2.3")
         type: string
       release-tag:
-        description: Tag to deploy from
+        description: Release tag of tarballs ("v1.2.3")
         type: string
 
 concurrency:
@@ -69,6 +69,11 @@ jobs:
           rm tarballs.tar
           tar -xvzf $(find . -maxdepth 1 -type f -printf '%f\n' | grep -E '^botframework-webchat-[0-9].*\.tgz$') --strip-components=2 --wildcards 'package/dist/webchat*.js'
           ls -la
+        working-directory: drops
+
+      - name: Compute SHA384
+        run: |
+          for file in $(ls *.js); do echo $file $(cat $file | openssl dgst -sha384 -binary | openssl base64 -A); done
         working-directory: drops
 
       - name: Upload tarballs
